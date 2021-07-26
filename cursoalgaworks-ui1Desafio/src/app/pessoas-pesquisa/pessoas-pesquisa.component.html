@@ -1,21 +1,21 @@
 <div class="container">
-  <div class="p-grid">
+  <div class="grid">
 
-    <div class="p-col-12">
+    <div class="col-12">
       <h1>Lançamentos</h1>
     </div>
-    <div class="p-col-12 p-fluid pesquisa">
+    <div class="col-12 p-fluid">
       <label>Nome</label>
       <input type="text" pInputText>
     </div>
-    <div class="p-col-12">
+    <div class="col-12">
       <button pButton type="submit" label="Pesquisar"></button>
     </div>
 
   </div>
 
-  <div class="p-col-12 tabela">
-    <div class="p-col-12">
+  <div class="col-12">
+    <div class="col-12">
       <p-table [value]="pessoas" [paginator]="true" [rows]="3" [responsive]="true">
         <ng-template pTemplate="header">
           <tr>
@@ -54,7 +54,7 @@
     </div>
   </div>
 
-  <div class="p-col-12">
+  <div class="col-12">
     <a pButton label="Nova Pessoa"></a>
   </div>
 
