@@ -1,0 +1,40 @@
+<div class="container">
+
+  <div class="grid">
+
+    <div class="col-12">
+      <h1>Lançamentos</h1>
+    </div>
+    <!-- ui-fluid todos os filhos da classe ficam inline -->
+    <!-- A partir do angular 10 o p-grid substitui o ui-g -->
+    <div class="col-12 p-fluid">
+      <label>Descrição</label>
+      <input type="text" pInputText>
+    </div>
+
+    <div class="col-12 pesquisa">
+      <label style="display: block;">Vencimento</label>
+      <input type="text" style="width: 95px;" pInputText>
+
+      <label class="ateSpace">até</label>
+      <input type="text" style="width: 95px;" pInputText>
+
+    </div>
+
+    <div class="col-12">
+      <button pButton type="submit" label="Pesquisar"></button>
+    </div>
+
+  </div>
+
+  <div class="grid">
+    <div class="col-12">
+      <app-lancamentos-grid [lancamentos]="lancamentos"></app-lancamentos-grid>
+    </div>
+
+    <div class="col-12">
+      <a pButton label="Novo Lançamento"></a>
+    </div>
+  </div>
+
+</div>
