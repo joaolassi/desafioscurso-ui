@@ -43,7 +43,7 @@ export class PessoaService {
 
   }
 
-  listarTodas() {
+  listarTodas(): Promise<any> {
     const headers = new HttpHeaders()
       .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
 
