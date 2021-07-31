@@ -50,7 +50,8 @@ export class PessoaService {
 
     return this.http.get(`${this.pessoasUrl}`, { headers })
       .toPromise()
-      .then( response => response)
-
+      .then((response: any) =>
+        response['content']
+      )
   }
 }
