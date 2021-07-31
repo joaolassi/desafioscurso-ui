@@ -1,0 +1,19 @@
+.col-data-header {
+  width: 120px;
+}
+.col-status-header {
+  width: 120px;
+}
+
+.col-acoes-header {
+  width: 115px;
+}
+
+.col-acoes {
+  width: 115px;
+  text-align: center !important;
+}
+
+.col-acoes .p-button {
+  margin: 1px;
+}
