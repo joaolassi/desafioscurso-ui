@@ -1,0 +1,78 @@
+<div class="container">
+  <form #f="ngForm" (ngSubmit)="salvar(f)">
+
+    <div class="grid">
+
+      <div class="col-12">
+        <h1>Novo Lançamento</h1>
+      </div>
+
+      <div class="col-12">
+        <p-selectButton [options]="tipos" #tipo name="tipo" [(ngModel)]="lancamento.tipo"></p-selectButton>
+      </div>
+
+      <div class="col-12 lg:col-4 md:col-6  p-fluid">
+        <label>Vencimento</label>
+        <p-calendar dateFormat="dd/mm/yy" [inline]="false" [readonlyInput]="false" [showIcon]="false" name="vencimento"
+          [required]="true" [(ngModel)]="lancamento.dataVencimento" #vencimento="ngModel"></p-calendar>
+
+        <app-message [control]="vencimento.control" error="required" text="Informe uma data de vencimento">
+        </app-message>
+      </div>
+
+      <div class="col-12 lg:col-4 md:col-6 p-fluid">
+        <label>{{ tipo.value === 'RECEITA'? 'Recebimento' : 'Pagamento'}}</label>
+        <p-calendar dateFormat="dd/mm/yy" [inline]="false" [readonlyInput]="false" [showIcon]="false"
+          [(ngModel)]="lancamento.dataPagamento" name="dataPagamento"></p-calendar>
+      </div>
+
+      <div class="col-12 lg:col-8 md:col-6 p-fluid">
+        <label>Descrição</label>
+        <input pInputText type="text" name="descricao" [(ngModel)]="lancamento.descricao" #descricao="ngModel" required
+          minlength="5">
+
+        <!-- Se torna descricao.control.
+        Estavam sendo enviado um ngForm para um formControl
+        E o angular passou a não permitir mais a tipagem diferente. -->
+        <app-message [control]="descricao.control" error="required" text="Informe uma descrição"></app-message>
+
+        <app-message [control]="descricao.control" error="minlength"
+          text="Mínimo de {{ descricao.errors?.minlength?.requiredLength }} caracteres"></app-message>
+
+      </div>
+      <div class="col-12 lg:col-4 md:col-6 p-fluid">
+        <label>Valor</label>
+        <input pInputText type="text" placeholder="0,00" name="valor" currencyMask
+          [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }" [(ngModel)]="lancamento.valor"
+          name="valor" [required]="true" #valor="ngModel">
+
+        <app-message [control]="valor.control" error="required" text="Informe um valor"></app-message>
+      </div>
+
+      <div class="col-12 lg:col-6 md:col-6 p-fluid">
+        <label>Categoria</label>
+        <p-dropdown [options]="categorias" placeholder="Selecione" name="categoria"
+          [(ngModel)]="lancamento.categoria.codigo" [required]="true"></p-dropdown>
+      </div>
+
+      <div class="col-12 lg:col-6 md:col-6 p-fluid">
+        <label>Pessoa</label>
+        <p-dropdown [options]="pessoas" placeholder="Selecione" [filter]="true" name="pessoa"
+          [(ngModel)]="lancamento.pessoa.codigo" [required]="true"></p-dropdown>
+      </div>
+
+      <div class="col-12 lg:col-12 md:col-12 p-fluid">
+        <label>Observação</label>
+        <textarea pInputTextarea rows="3" [(ngModel)]="lancamento.observacao" name="observacao"></textarea>
+      </div>
+
+      <div class="col-12 lg:col-12 md:col-12">
+        <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
+        <button pButton type="button" label="Novo" class="p-button-info"></button>
+        <a href="javascript:;">Voltar para a pesquisa</a>
+      </div>
+
+    </div>
+
+  </form>
+</div>
