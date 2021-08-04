@@ -1,0 +1,67 @@
+<div class="container">
+  <form (ngSubmit)="pesquisar()">
+    <div class="grid">
+      <div class="col-12">
+        <h1>Pessoas</h1>
+      </div>
+      <div class="col-12 p-fluid">
+        <label>Nome</label>
+        <input type="text" pInputText name="nome" [(ngModel)]="filtro.nome">
+      </div>
+      <div class="col-12">
+        <button pButton type="submit" label="Pesquisar"></button>
+      </div>
+    </div>
+  </form>
+
+  <div class="col-12">
+    <div class="col-12">
+      <p-table [value]="pessoas" [paginator]="true" [rows]="filtro.itensPorPagina" [responsive]="true" [lazy]="true"
+        [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Nome</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            <th class="col-status-header">Status</th>
+            <th class="col-acoes-header"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-pessoa>
+          <tr>
+            <td>
+              <span class="p-column-title">Nome</span>
+              {{ pessoa.nome }}
+            </td>
+            <td>
+              <span class="p-column-title">Cidade</span>
+              {{ pessoa.endereco.cidade }}
+            </td>
+            <td>
+              <span class="p-column-title">Estado</span>
+              {{ pessoa.endereco.estado }}
+            </td>
+            <td>
+              <span class="p-column-title">Status</span>
+              <a href="javascript:;" tooltipPosition="top" [pTooltip]="pessoa.ativo ? 'Desativar' : 'Ativar'"
+                (click)="mudarStatus(pessoa)">
+                {{ pessoa.ativo ? 'Ativo' : 'Inativo' }}
+              </a>
+            </td>
+            <td class="col-acoes">
+              <a pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top"
+                [routerLink]="['/pessoas', pessoa.codigo]"></a>
+              <button pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top"
+                (click)="confirmarExclusao(pessoa)" [disabled]="!auth.temPermissao('ROLE_REMOVER_PESSOA')"></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <a pButton label="Nova Pessoa" routerLink="/pessoas/nova"></a>
+  </div>
+
+</div>
